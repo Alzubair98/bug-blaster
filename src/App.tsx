@@ -7,7 +7,6 @@ export default function App() {
   const buttonRef = useRef<HTMLButtonElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  const blastIcons = useRef<HTMLSpanElement[]>([]);
   const blastContainer = useRef<HTMLDivElement>(null);
   const glowRef = useRef<HTMLDivElement>(null);
   const intervalRef = useRef<number | null>(null);
