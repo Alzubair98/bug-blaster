@@ -59,7 +59,7 @@ export default function App() {
 
   const createBlastIcon = () => {
     if (!blastContainer.current) return;
-    const icons = ["💥", "🚀", "🐞"];
+    const icons = ["💥", "🚀", "🐞", "🔥"];
     const icon = document.createElement("span");
     icon.textContent = icons[Math.floor(Math.random() * icons.length)];
     icon.style.position = "absolute";
@@ -71,7 +71,7 @@ export default function App() {
     blastContainer.current.appendChild(icon);
 
     const angle = Math.random() * Math.PI * 2;
-    const distance = 60 + Math.random() * 60;
+    const distance = 90 + Math.random() * 60;
     const x = Math.cos(angle) * distance;
     const y = Math.sin(angle) * distance;
 
@@ -81,7 +81,7 @@ export default function App() {
       {
         x,
         y: y - 50,
-        opacity: 0,
+        opacity: 50,
         scale: 1.5,
         duration: 0.6,
         ease: "power2.out",
@@ -144,14 +144,13 @@ export default function App() {
 
       <div className="relative inline-block">
         <div
-          ref={blastContainer}
-          className="absolute left-0 top-0 w-full h-full pointer-events-none"
-        ></div>
-        <div
           ref={glowRef}
           className="absolute left-1/2 top-1/2 w-[180px] h-[70px] rounded-2xl bg-gradient-to-r from-red-500 to-green-500 blur-2xl opacity-0 -translate-x-1/2 -translate-y-1/2"
         ></div>
-
+        <div
+          ref={blastContainer}
+          className="absolute left-0 top-0 w-full h-full pointer-events-none"
+        ></div>
         <button
           ref={buttonRef}
           onMouseEnter={handleHover}
