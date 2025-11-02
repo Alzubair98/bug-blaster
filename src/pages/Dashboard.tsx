@@ -5,6 +5,8 @@ import TicketFrom from "../components/TicketForm";
 export default function Dashboard() {
   const containerRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLParagraphElement>(null);
+  const formRef = useRef<HTMLFormElement>(null);
+
   useEffect(() => {
     const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
 
@@ -20,6 +22,13 @@ export default function Dashboard() {
       { y: 0, opacity: 1, duration: 1 },
       "-=0.7"
     );
+
+    tl.fromTo(
+      formRef.current,
+      { scale: 0.5, y: -400, opacity: 0 },
+      { scale: 1, y: 0, opacity: 1, duration: 0.8, ease: "back.out(2)" },
+      "-=0.4"
+    );
   });
   return (
     <div
@@ -34,7 +43,7 @@ export default function Dashboard() {
           Dashboard
         </h1>
 
-        <TicketFrom />
+        <TicketFrom ref={formRef} />
       </div>
     </div>
   );
