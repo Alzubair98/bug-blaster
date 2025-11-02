@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useCallback, useMemo } from "react";
 import BlasterButton from "./BlasterButton";
 
 export default function TicketFrom() {
@@ -6,22 +6,28 @@ export default function TicketFrom() {
   const [description, setDescription] = useState("");
   const [priority, setPriority] = useState("1");
 
-  const prirityLabels = {
-    1: "Low",
-    2: "Medium",
-    3: "High",
-  };
+  const prirityLabels = useMemo(
+    () => ({
+      1: "Low",
+      2: "Medium",
+      3: "High",
+    }),
+    []
+  );
 
-  const clearFrom = () => {
+  const clearFrom = useCallback(() => {
     setTitle("");
     setDescription("");
     setPriority("1");
-  };
+  }, []);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    clearFrom();
-  };
+  const handleSubmit = useCallback(
+    (e: React.FormEvent) => {
+      e.preventDefault();
+      clearFrom();
+    },
+    [clearFrom]
+  );
 
   return (
     <form onSubmit={handleSubmit} className="ticket-form text-white">
