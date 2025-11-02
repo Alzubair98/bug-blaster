@@ -76,7 +76,7 @@ export default function HomePage() {
 
       <BlasterButton
         ref={buttonRef}
-        onClick={() => alert("Get Started clicked!")}
+        onClick={() => (window.location.href = "/dashboard")}
         label="Launch the Blaster 🚀"
         className="py-5 px-10"
       />
