@@ -1,4 +1,4 @@
-import { useState, useCallback, useMemo, useRef, forwardRef } from "react";
+import { useState, useCallback, useMemo, forwardRef } from "react";
 import BlasterButton from "./BlasterButton";
 import gsap from "gsap";
 
@@ -25,10 +25,33 @@ const TicketForm = forwardRef<HTMLFormElement, TicketFormProps>(
       []
     );
 
+    const animateClear = useCallback(() => {
+      const fields = document.querySelectorAll(
+        ".ticket-form input, .ticket-form textarea"
+      );
+
+      gsap
+        .timeline()
+        .to(fields, {
+          scale: 0.9,
+          opacity: 0.5,
+          duration: 0.15,
+          ease: "power2.inOut",
+        })
+        .to(fields, {
+          scale: 1,
+          opacity: 1,
+          duration: 0.25,
+          ease: "back.out(2)",
+          stagger: 0.05,
+        });
+    }, []);
+
     const clearForm = useCallback(() => {
       setTitle("");
       setDescription("");
       setPriority("1");
+      animateClear();
     }, []);
 
     const handleSubmit = useCallback(
