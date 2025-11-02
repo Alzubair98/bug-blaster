@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
+import TicketFrom from "../components/TicketForm";
 
 export default function Dashboard() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -32,6 +33,8 @@ export default function Dashboard() {
         >
           Dashboard
         </h1>
+
+        <TicketFrom />
       </div>
     </div>
   );

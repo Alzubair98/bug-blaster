@@ -3,6 +3,7 @@ import gsap from "gsap";
 
 interface BlasterButtonProps {
   label: string;
+  type?: "button" | "submit" | "reset";
   onClick?: () => void;
   className?: string;
   colors?: {
@@ -17,6 +18,7 @@ const BlasterButton = forwardRef<HTMLDivElement, BlasterButtonProps>(
       label,
       onClick,
       className = "",
+      type = "button",
       colors = { from: "from-red-500", to: "to-green-500" },
     },
     ref
@@ -102,6 +104,7 @@ const BlasterButton = forwardRef<HTMLDivElement, BlasterButtonProps>(
           className="absolute left-0 top-0 w-full h-full pointer-events-none"
         ></div>
         <button
+          type={type}
           onClick={onClick}
           ref={buttonRef}
           onMouseEnter={handleHover}

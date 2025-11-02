@@ -1,4 +1,5 @@
 import { useState } from "react";
+import BlasterButton from "./BlasterButton";
 
 export default function TicketFrom() {
   const [title, setTitle] = useState("");
@@ -23,7 +24,7 @@ export default function TicketFrom() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="ticket-form">
+    <form onSubmit={handleSubmit} className="ticket-form text-white">
       <div>
         <label>Title</label>
         <input
@@ -44,6 +45,29 @@ export default function TicketFrom() {
           required
         />
       </div>
+
+      <fieldset className="priority-fieldset">
+        <legend>Priority</legend>
+
+        {Object.entries(prirityLabels).map(([value, label]) => (
+          <label key={value} className="px-4 text-white">
+            <input
+              type="radio"
+              value={value}
+              checked={priority == value}
+              className="priority-input"
+              onChange={(e) => setPriority(e.target.value)}
+            ></input>
+            {label}
+          </label>
+        ))}
+      </fieldset>
+
+      <BlasterButton
+        type="submit"
+        label="Create Ticket"
+        className="mt-4 py-4 px-10"
+      />
     </form>
   );
 }
