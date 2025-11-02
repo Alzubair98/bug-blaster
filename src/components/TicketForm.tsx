@@ -57,8 +57,15 @@ const TicketForm = forwardRef<HTMLFormElement, TicketFormProps>(
     const handleSubmit = useCallback(
       (e: React.FormEvent) => {
         e.preventDefault();
-        const formData = { title, description, priority };
-        onSubmit?.(formData);
+
+        const ticketData = {
+          id: new Date().toISOString(),
+          title,
+          description,
+          priority,
+        };
+
+        onSubmit?.(ticketData);
         clearForm();
       },
       [title, description, priority, clearForm, onSubmit]
