@@ -51,7 +51,7 @@ export default function NotFoundPage() {
       buttonRef.current,
       { opacity: 0, y: 50, scale: 0.8 },
       { opacity: 1, y: 0, scale: 1, duration: 0.6, ease: "back.out(1.7)" },
-      "+=0.2"
+      "-=0.2"
     );
 
     tl.to(sparkRef.current, {
