@@ -1,6 +1,7 @@
-import { useEffect, useRef } from "react";
+import { use, useEffect, useRef } from "react";
 import gsap from "gsap";
 import BlasterButton from "../components/BlasterButton";
+import { useNavigate } from "react-router-dom";
 
 export default function HomePage() {
   const titleRef = useRef<HTMLHeadingElement>(null);
@@ -8,6 +9,8 @@ export default function HomePage() {
   const buttonRef = useRef<HTMLDivElement>(null);
 
   const containerRef = useRef<HTMLDivElement>(null);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
@@ -75,8 +78,9 @@ export default function HomePage() {
       </p>
 
       <BlasterButton
+        type="button"
         ref={buttonRef}
-        onClick={() => (window.location.href = "/dashboard")}
+        onClick={() => navigate("/dashboard")}
         label="Launch the Blaster 🚀"
         className="py-5 px-10"
       />

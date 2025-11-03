@@ -62,15 +62,17 @@ const TicketForm = forwardRef<HTMLFormElement, TicketFormProps>(
           priority,
         };
 
-        console.log("Submitting Ticket:", ticketData);
+        dispatch({ type: "ADD_TICKET", payload: ticketData });
+
         clearForm();
       },
-      [title, description, priority, clearForm]
+      [title, description, priority, clearForm, dispatch]
     );
 
     return (
       <form
         ref={ref}
+        action="#"
         onSubmit={handleSubmit}
         className="ticket-form text-white"
       >
