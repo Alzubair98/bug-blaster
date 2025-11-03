@@ -1,4 +1,4 @@
-type Action =
+export type Action =
   | { type: "ADD_TICKET"; payload: Ticket }
   | { type: "UPDATE_TICKET"; payload: Ticket }
   | { type: "DELETE_TICKET"; payload: Ticket };

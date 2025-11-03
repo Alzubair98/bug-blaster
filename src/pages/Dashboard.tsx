@@ -1,8 +1,13 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import TicketFrom from "../components/TicketForm";
+import type { Action } from "../reducers/ticketReducer";
 
-export default function Dashboard() {
+export default function Dashboard({
+  dispatch,
+}: {
+  dispatch: React.Dispatch<Action>;
+}) {
   const containerRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLParagraphElement>(null);
   const formRef = useRef<HTMLFormElement>(null);
@@ -43,7 +48,7 @@ export default function Dashboard() {
           Dashboard
         </h1>
 
-        <TicketFrom ref={formRef} />
+        <TicketFrom ref={formRef} dispatch={dispatch} />
       </div>
     </div>
   );
