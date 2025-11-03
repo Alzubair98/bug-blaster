@@ -1,4 +1,20 @@
-export default function ticketReducer(state: any, action: any) {
+type Action =
+  | { type: "ADD_TICKET"; payload: Ticket }
+  | { type: "UPDATE_TICKET"; payload: Ticket }
+  | { type: "DELETE_TICKET"; payload: Ticket };
+
+interface InitialState {
+  tickets: Ticket[];
+}
+
+interface Ticket {
+  id: string;
+  title: string;
+  description: string;
+  priority: string;
+}
+
+export default function ticketReducer(state: InitialState, action: Action) {
   switch (action.type) {
     case "ADD_TICKET":
       return {
@@ -9,7 +25,7 @@ export default function ticketReducer(state: any, action: any) {
     case "UPDATE_TICKET":
       return {
         ...state,
-        tickets: state.tickets.map((ticket: any) =>
+        tickets: state.tickets.map((ticket: Ticket) =>
           ticket.id === action.payload.id ? action.payload : ticket
         ),
       };
@@ -18,7 +34,7 @@ export default function ticketReducer(state: any, action: any) {
       return {
         ...state,
         tickets: state.tickets.filter(
-          (ticket: any) => ticket.id !== action.payload.id
+          (ticket: Ticket) => ticket.id !== action.payload.id
         ),
       };
     default:
