@@ -54,7 +54,7 @@ export default function TicketItem({
             y: el.getBoundingClientRect().top,
           }));
 
-          positionsAfter.forEach((after, i) => {
+          positionsAfter.forEach((after) => {
             const before = positionsBefore.find((b) => b.el === after.el);
             if (!before) return;
             const dy = before.y - after.y;
