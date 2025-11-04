@@ -49,7 +49,7 @@ const TicketForm = forwardRef<HTMLFormElement, TicketFormProps>(
       setDescription("");
       setPriority("1");
       animateClear();
-    }, []);
+    }, [animateClear]);
 
     const handleSubmit = useCallback(
       (e: React.FormEvent) => {

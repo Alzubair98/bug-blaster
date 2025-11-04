@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
-import TicketFrom from "../components/TicketForm";
+import TicketForm from "../components/TicketForm";
 import type { Action, InitialState } from "../reducers/ticketReducer";
 import TicketList from "../components/TicketList";
 
@@ -37,7 +37,7 @@ export default function Dashboard({
       { scale: 1, y: 0, opacity: 1, duration: 0.8, ease: "back.out(2)" },
       "-=0.4"
     );
-  });
+  }, []);
   return (
     <div
       ref={containerRef}
@@ -51,10 +51,10 @@ export default function Dashboard({
           Dashboard
         </h1>
 
-        <TicketFrom ref={formRef} dispatch={dispatch} />
+        <TicketForm ref={formRef} dispatch={dispatch} />
 
         {state.tickets.length > 0 && (
-          <div>
+          <div className="results">
             <h2 className="mt-5 text-white text-2xl"> All Tickets</h2>
 
             <TicketList tickets={state.tickets} dispatch={dispatch} />

@@ -18,7 +18,7 @@ export default function TicketItem({
   const { id, title, description, priority } = ticket;
 
   return (
-    <div className="ticket-item">
+    <div className="ticket-item text-white">
       <div
         className={`priority-dot ${
           priorityClass[parseInt(priority) as 1 | 2 | 3]
