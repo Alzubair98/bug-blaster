@@ -3,11 +3,11 @@ export type Action =
   | { type: "UPDATE_TICKET"; payload: Ticket }
   | { type: "DELETE_TICKET"; payload: Ticket };
 
-interface InitialState {
+export interface InitialState {
   tickets: Ticket[];
 }
 
-interface Ticket {
+export interface Ticket {
   id: string;
   title: string;
   description: string;

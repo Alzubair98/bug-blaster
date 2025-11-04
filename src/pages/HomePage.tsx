@@ -1,4 +1,4 @@
-import { use, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import BlasterButton from "../components/BlasterButton";
 import { useNavigate } from "react-router-dom";
