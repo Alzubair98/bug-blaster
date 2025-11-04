@@ -7,6 +7,7 @@ export type Action =
 
 export interface InitialState {
   tickets: Ticket[];
+  editingTicket: Ticket | null;
 }
 
 export interface Ticket {

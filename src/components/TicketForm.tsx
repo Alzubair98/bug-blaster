@@ -57,17 +57,22 @@ const TicketForm = forwardRef<HTMLFormElement, TicketFormProps>(
         e.preventDefault();
 
         const ticketData = {
-          id: new Date().toISOString(),
+          id: state.editingTicket
+            ? state.editingTicket.id
+            : new Date().toISOString(),
           title,
           description,
           priority,
         };
 
-        dispatch({ type: "ADD_TICKET", payload: ticketData });
+        dispatch({
+          type: state.editingTicket ? "UPDATE_TICKET" : "ADD_TICKET",
+          payload: ticketData,
+        });
 
         clearForm();
       },
-      [title, description, priority, clearForm, dispatch]
+      [title, description, priority, clearForm, dispatch, state.editingTicket]
     );
 
     return (
