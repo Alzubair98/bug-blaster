@@ -51,7 +51,7 @@ export default function Dashboard({
           Dashboard
         </h1>
 
-        <TicketForm ref={formRef} dispatch={dispatch} />
+        <TicketForm ref={formRef} dispatch={dispatch} state={state} />
 
         {state.tickets.length > 0 && (
           <div className="results">

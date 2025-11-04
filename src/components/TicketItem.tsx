@@ -82,12 +82,21 @@ export default function TicketItem({
       <h3>{title}</h3>
       <p>{description}</p>
 
-      <BlasterButton
-        type="button"
-        className="mt-3 py-2 px-2"
-        label="Delete"
-        onClick={handleDeleteAnimation}
-      />
+      <div className="flex gap-5 justify-center">
+        <BlasterButton
+          type="button"
+          className="mt-3 py-2 px-2"
+          label="Delete"
+          onClick={handleDeleteAnimation}
+        />
+
+        <BlasterButton
+          type="button"
+          className="mt-3 py-2 px-2 "
+          label="Edit"
+          onClick={() => dispatch({ type: "UPDATE_TICKET", payload: ticket })}
+        />
+      </div>
     </div>
   );
 }

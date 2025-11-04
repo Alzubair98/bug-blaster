@@ -1,14 +1,15 @@
 import { useState, useCallback, useMemo, forwardRef } from "react";
 import BlasterButton from "./BlasterButton";
 import gsap from "gsap";
-import type { Action } from "../reducers/ticketReducer";
+import type { Action, InitialState } from "../reducers/ticketReducer";
 
 interface TicketFormProps {
   dispatch: React.Dispatch<Action>;
+  state: InitialState;
 }
 
 const TicketForm = forwardRef<HTMLFormElement, TicketFormProps>(
-  ({ dispatch }, ref) => {
+  ({ dispatch, state }, ref) => {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [priority, setPriority] = useState("1");

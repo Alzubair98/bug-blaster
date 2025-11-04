@@ -4,7 +4,7 @@ import { useReducer } from "react";
 import ticketReducer from "./reducers/ticketReducer";
 
 export default function App() {
-  const initialState = { tickets: [] };
+  const initialState = { tickets: [], editingTicket: null };
 
   // use reducer
   const [state, dispatch] = useReducer(ticketReducer, initialState);

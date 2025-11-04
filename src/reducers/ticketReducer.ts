@@ -1,7 +1,9 @@
 export type Action =
   | { type: "ADD_TICKET"; payload: Ticket }
   | { type: "UPDATE_TICKET"; payload: Ticket }
-  | { type: "DELETE_TICKET"; payload: Ticket };
+  | { type: "DELETE_TICKET"; payload: Ticket }
+  | { type: "SET_EDITING_TICKET"; payload: Ticket }
+  | { type: "CLEAR_EDITING_TICKET" };
 
 export interface InitialState {
   tickets: Ticket[];
@@ -36,6 +38,18 @@ export default function ticketReducer(state: InitialState, action: Action) {
         tickets: state.tickets.filter(
           (ticket: Ticket) => ticket.id !== action.payload.id
         ),
+      };
+
+    case "SET_EDITING_TICKET":
+      return {
+        ...state,
+        editingTicket: action.payload,
+      };
+
+    case "CLEAR_EDITING_TICKET":
+      return {
+        ...state,
+        editingTicket: null,
       };
     default:
       return state;
