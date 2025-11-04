@@ -11,7 +11,7 @@ export default function App() {
   return (
     <>
       <BrowserRouter>
-        <AppRouter dispatch={dispatch} />
+        <AppRouter dispatch={dispatch} state={state} />
       </BrowserRouter>
     </>
   );

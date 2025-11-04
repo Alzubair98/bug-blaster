@@ -1,12 +1,15 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import TicketFrom from "../components/TicketForm";
-import type { Action } from "../reducers/ticketReducer";
+import type { Action, InitialState } from "../reducers/ticketReducer";
+import TicketList from "../components/TicketList";
 
 export default function Dashboard({
   dispatch,
+  state,
 }: {
   dispatch: React.Dispatch<Action>;
+  state: InitialState;
 }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLParagraphElement>(null);
@@ -49,6 +52,14 @@ export default function Dashboard({
         </h1>
 
         <TicketFrom ref={formRef} dispatch={dispatch} />
+
+        {state.tickets.length > 0 && (
+          <div>
+            <h2 className="mt-5 text-white text-2xl"> All Tickets</h2>
+
+            <TicketList tickets={state.tickets} dispatch={dispatch} />
+          </div>
+        )}
       </div>
     </div>
   );
