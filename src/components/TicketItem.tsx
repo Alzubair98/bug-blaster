@@ -3,7 +3,6 @@ import BlasterButton from "./BlasterButton";
 import { useRef } from "react";
 import gsap from "gsap";
 
-// send priority class outside the ticket function to avoid re-creation on each render
 const priorityClass = {
   1: "priority-low",
   2: "priority-medium",
@@ -23,14 +22,51 @@ export default function TicketItem({
   const handleDeleteAnimation = () => {
     if (!itemRef.current) return;
 
+    const listContainer = itemRef.current.parentElement;
+
+    const siblings = listContainer
+      ? Array.from(listContainer.querySelectorAll(".ticket-item"))
+      : [];
+
+    const positionsBefore = siblings.map((el) => ({
+      el,
+      y: el.getBoundingClientRect().top,
+    }));
+
     gsap.to(itemRef.current, {
       opacity: 0,
-      scale: 0.7,
+      scale: 0.8,
       y: 50,
-      duration: 0.5,
+      duration: 0.4,
       ease: "power2.inOut",
       onComplete: () => {
         dispatch({ type: "DELETE_TICKET", payload: ticket });
+
+        requestAnimationFrame(() => {
+          if (!listContainer) return;
+
+          const remainingItems = Array.from(
+            listContainer.querySelectorAll(".ticket-item")
+          );
+
+          const positionsAfter = remainingItems.map((el) => ({
+            el,
+            y: el.getBoundingClientRect().top,
+          }));
+
+          positionsAfter.forEach((after, i) => {
+            const before = positionsBefore.find((b) => b.el === after.el);
+            if (!before) return;
+            const dy = before.y - after.y;
+            if (dy) {
+              gsap.fromTo(
+                after.el,
+                { y: dy },
+                { y: 0, duration: 0.4, ease: "power2.out" }
+              );
+            }
+          });
+        });
       },
     });
   };
@@ -51,7 +87,7 @@ export default function TicketItem({
         className="mt-3 py-2 px-2"
         label="Delete"
         onClick={handleDeleteAnimation}
-      ></BlasterButton>
+      />
     </div>
   );
 }
