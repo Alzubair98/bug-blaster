@@ -71,6 +71,26 @@ export default function TicketItem({
     });
   };
 
+  const handleEditAnimation = () => {
+    if (!itemRef.current) return;
+
+    const tl = gsap.timeline();
+
+    tl.to(itemRef.current, {
+      scale: 1.05,
+      boxShadow: "0 0 15px #22c55e",
+      duration: 0.3,
+      ease: "power2.out",
+    }).to(itemRef.current, {
+      scale: 1,
+      boxShadow: "0 0 0px transparent",
+      duration: 0.4,
+      ease: "power2.out",
+    });
+
+    dispatch({ type: "SET_EDITING_TICKET", payload: ticket });
+  };
+
   return (
     <div ref={itemRef} className="ticket-item text-white">
       <div
@@ -94,9 +114,7 @@ export default function TicketItem({
           type="button"
           className="mt-3 py-2 px-2 "
           label="Edit"
-          onClick={() =>
-            dispatch({ type: "SET_EDITING_TICKET", payload: ticket })
-          }
+          onClick={handleEditAnimation}
         />
       </div>
     </div>
