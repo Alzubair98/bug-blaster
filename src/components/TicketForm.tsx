@@ -1,4 +1,4 @@
-import { useState, useCallback, useMemo, forwardRef } from "react";
+import { useState, useCallback, useMemo, forwardRef, useEffect } from "react";
 import BlasterButton from "./BlasterButton";
 import gsap from "gsap";
 import type { Action, InitialState } from "../reducers/ticketReducer";
@@ -13,6 +13,16 @@ const TicketForm = forwardRef<HTMLFormElement, TicketFormProps>(
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [priority, setPriority] = useState("1");
+
+    useEffect(() => {
+      if (state.editingTicket) {
+        setTitle(state.editingTicket.title);
+        setDescription(state.editingTicket.description);
+        setPriority(state.editingTicket.priority);
+      } else {
+        clearForm();
+      }
+    }, [state.editingTicket]);
 
     const priorityLabels = useMemo(
       () => ({
@@ -50,6 +60,8 @@ const TicketForm = forwardRef<HTMLFormElement, TicketFormProps>(
       setDescription("");
       setPriority("1");
       animateClear();
+
+      dispatch({ type: "CLEAR_EDITING_TICKET" });
     }, [animateClear]);
 
     const handleSubmit = useCallback(
@@ -121,7 +133,7 @@ const TicketForm = forwardRef<HTMLFormElement, TicketFormProps>(
 
         <BlasterButton
           type="submit"
-          label="Create Ticket"
+          label={state.editingTicket ? "Update Ticket" : "Add Ticket"}
           className="mt-4 py-4 px-10"
         />
       </form>

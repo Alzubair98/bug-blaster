@@ -94,7 +94,9 @@ export default function TicketItem({
           type="button"
           className="mt-3 py-2 px-2 "
           label="Edit"
-          onClick={() => dispatch({ type: "UPDATE_TICKET", payload: ticket })}
+          onClick={() =>
+            dispatch({ type: "SET_EDITING_TICKET", payload: ticket })
+          }
         />
       </div>
     </div>
