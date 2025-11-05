@@ -44,8 +44,8 @@ const TicketForm = forwardRef<HTMLFormElement, TicketFormProps>(
       }
     }, [state.editingTicket]);
 
-    const handleCancelAnimation = () => {
-      if (state.editingTicket && EditButton.current) {
+    const handleCancelAnimation = useCallback(() => {
+      if (EditButton.current) {
         gsap.to(EditButton.current, {
           opacity: 0,
           y: 30,
@@ -57,7 +57,7 @@ const TicketForm = forwardRef<HTMLFormElement, TicketFormProps>(
           },
         });
       }
-    };
+    }, [dispatch]);
 
     const priorityLabels = useMemo(
       () => ({
