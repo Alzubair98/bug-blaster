@@ -57,7 +57,11 @@ export default function Dashboard({
           <div className="results">
             <h2 className="mt-5 text-white text-2xl"> All Tickets</h2>
 
-            <TicketList tickets={state.tickets} dispatch={dispatch} />
+            <TicketList
+              tickets={state.tickets}
+              dispatch={dispatch}
+              formRef={formRef}
+            />
           </div>
         )}
       </div>

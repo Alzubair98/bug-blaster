@@ -12,9 +12,11 @@ const priorityClass = {
 export default function TicketItem({
   ticket,
   dispatch,
+  formRef,
 }: {
   ticket: Ticket;
   dispatch: React.Dispatch<Action>;
+  formRef: React.RefObject<HTMLFormElement>;
 }) {
   const { title, description, priority } = ticket;
   const itemRef = useRef<HTMLDivElement>(null);
@@ -89,6 +91,23 @@ export default function TicketItem({
     });
 
     dispatch({ type: "SET_EDITING_TICKET", payload: ticket });
+
+    if (formRef.current) {
+      tl.to(formRef.current, {
+        scale: 1.05,
+        opacity: 0.6,
+        onStart: () =>
+          formRef.current.classList.add("drop-shadow-[0_0_20px_#22c55e]"),
+      }).to(formRef.current, {
+        scale: 1,
+        opacity: 1,
+
+        duration: 0.4,
+        ease: "power2.out",
+        onComplete: () =>
+          itemRef.current?.classList.remove("drop-shadow-[0_0_20px_#22c55e]"),
+      });
+    }
   };
 
   return (
