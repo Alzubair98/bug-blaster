@@ -31,6 +31,8 @@ export default function ticketReducer(state: InitialState, action: Action) {
         tickets: state.tickets.map((ticket: Ticket) =>
           ticket.id === action.payload.id ? action.payload : ticket
         ),
+
+        editingTicket: null,
       };
 
     case "DELETE_TICKET":

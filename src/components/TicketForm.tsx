@@ -60,8 +60,6 @@ const TicketForm = forwardRef<HTMLFormElement, TicketFormProps>(
       setDescription("");
       setPriority("1");
       animateClear();
-
-      dispatch({ type: "CLEAR_EDITING_TICKET" });
     }, [animateClear]);
 
     const handleSubmit = useCallback(
