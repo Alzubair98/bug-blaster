@@ -134,6 +134,15 @@ const TicketForm = forwardRef<HTMLFormElement, TicketFormProps>(
           label={state.editingTicket ? "Update Ticket" : "Add Ticket"}
           className="mt-4 py-4 px-10"
         />
+
+        {state.editingTicket && (
+          <BlasterButton
+            type="button"
+            onClick={() => dispatch({ type: "CLEAR_EDITING_TICKET" })}
+            label={"Cancel Update"}
+            className="mt-4 mx-4 py-4 px-10"
+          />
+        )}
       </form>
     );
   }
