@@ -1,4 +1,11 @@
-import { useState, useCallback, useMemo, forwardRef, useEffect } from "react";
+import {
+  useState,
+  useCallback,
+  useMemo,
+  forwardRef,
+  useEffect,
+  useRef,
+} from "react";
 import BlasterButton from "./BlasterButton";
 import gsap from "gsap";
 import type { Action, InitialState } from "../reducers/ticketReducer";
@@ -14,6 +21,9 @@ const TicketForm = forwardRef<HTMLFormElement, TicketFormProps>(
     const [description, setDescription] = useState("");
     const [priority, setPriority] = useState("1");
 
+    // edit button ref
+    const EditButton = useRef<HTMLDivElement>(null);
+
     useEffect(() => {
       if (state.editingTicket) {
         setTitle(state.editingTicket.title);
@@ -23,6 +33,31 @@ const TicketForm = forwardRef<HTMLFormElement, TicketFormProps>(
         clearForm();
       }
     }, [state.editingTicket]);
+
+    useEffect(() => {
+      if (state.editingTicket && EditButton.current) {
+        gsap.fromTo(
+          EditButton.current,
+          { opacity: 0, y: 30, scale: 0.95 },
+          { opacity: 1, y: 0, scale: 1, duration: 0.8, ease: "back.out(1.7)" }
+        );
+      }
+    }, [state.editingTicket]);
+
+    const handleCancelAnimation = () => {
+      if (state.editingTicket && EditButton.current) {
+        gsap.to(EditButton.current, {
+          opacity: 0,
+          y: 30,
+          scale: 0.9,
+          duration: 0.8,
+          ease: "power2.inOut",
+          onComplete: () => {
+            dispatch({ type: "CLEAR_EDITING_TICKET" });
+          },
+        });
+      }
+    };
 
     const priorityLabels = useMemo(
       () => ({
@@ -138,9 +173,10 @@ const TicketForm = forwardRef<HTMLFormElement, TicketFormProps>(
         {state.editingTicket && (
           <BlasterButton
             type="button"
-            onClick={() => dispatch({ type: "CLEAR_EDITING_TICKET" })}
+            onClick={handleCancelAnimation}
             label={"Cancel Update"}
             className="mt-4 mx-4 py-4 px-10"
+            ref={EditButton}
           />
         )}
       </form>
