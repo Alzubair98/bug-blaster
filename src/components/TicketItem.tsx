@@ -44,8 +44,6 @@ export default function TicketItem({
       onComplete: () => {
         dispatch({ type: "DELETE_TICKET", payload: ticket });
 
-        dispatch({ type: "CLEAR_EDITING_TICKET" });
-
         requestAnimationFrame(() => {
           if (!listContainer) return;
 

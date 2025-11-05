@@ -36,12 +36,22 @@ export default function ticketReducer(state: InitialState, action: Action) {
       };
 
     case "DELETE_TICKET":
-      return {
-        ...state,
-        tickets: state.tickets.filter(
-          (ticket: Ticket) => ticket.id !== action.payload.id
-        ),
-      };
+      if (state.editingTicket && state.editingTicket.id === action.payload.id) {
+        return {
+          ...state,
+          tickets: state.tickets.filter(
+            (ticket: Ticket) => ticket.id !== action.payload.id
+          ),
+          editingTicket: null,
+        };
+      } else {
+        return {
+          ...state,
+          tickets: state.tickets.filter(
+            (ticket: Ticket) => ticket.id !== action.payload.id
+          ),
+        };
+      }
 
     case "SET_EDITING_TICKET":
       return {
