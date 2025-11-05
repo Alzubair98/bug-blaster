@@ -44,6 +44,8 @@ export default function TicketItem({
       onComplete: () => {
         dispatch({ type: "DELETE_TICKET", payload: ticket });
 
+        dispatch({ type: "CLEAR_EDITING_TICKET" });
+
         requestAnimationFrame(() => {
           if (!listContainer) return;
 
@@ -105,7 +107,7 @@ export default function TicketItem({
         duration: 0.4,
         ease: "power2.out",
         onComplete: () =>
-          itemRef.current?.classList.remove("drop-shadow-[0_0_20px_#22c55e]"),
+          formRef.current?.classList.remove("drop-shadow-[0_0_20px_#22c55e]"),
       });
     }
   };
