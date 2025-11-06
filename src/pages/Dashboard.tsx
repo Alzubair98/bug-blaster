@@ -1,15 +1,17 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import TicketForm from "../components/TicketForm";
-import type { Action, InitialState } from "../reducers/ticketReducer";
+import type { Action, InitialState, Ticket } from "../reducers/ticketReducer";
 import TicketList from "../components/TicketList";
 
 export default function Dashboard({
   dispatch,
   state,
+  sortedTickets,
 }: {
   dispatch: React.Dispatch<Action>;
   state: InitialState;
+  sortedTickets: Ticket[];
 }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLParagraphElement>(null);
@@ -56,10 +58,25 @@ export default function Dashboard({
 
         {state.tickets.length > 0 && (
           <div className="results">
-            <h2 className="mt-5 text-white text-2xl"> All Tickets</h2>
+            <h2 className="mt-5 text-white text-2xl">All Tickets</h2>
+
+            <select
+              className="text-white"
+              value={state.sortPreference}
+              onChange={(e) =>
+                dispatch({ type: "SET_SORTING", payload: e.target.value })
+              }
+            >
+              <option value="High to Low" className="text-black">
+                High to Low
+              </option>
+              <option value="Low to High" className="text-black">
+                Low to High
+              </option>
+            </select>
 
             <TicketList
-              tickets={state.tickets}
+              tickets={sortedTickets}
               dispatch={dispatch}
               formRef={formRef}
             />

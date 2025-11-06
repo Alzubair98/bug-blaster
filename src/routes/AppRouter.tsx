@@ -2,14 +2,16 @@ import { Routes, Route } from "react-router-dom";
 import NotFoundPage from "../pages/NotFoundPage";
 import HomePage from "../pages/HomePage";
 import Dashboard from "../pages/dashboard";
-import type { Action, InitialState } from "../reducers/ticketReducer";
+import type { Action, InitialState, Ticket } from "../reducers/ticketReducer";
 
 export default function AppRouter({
   dispatch,
   state,
+  sortedTickets,
 }: {
   dispatch: React.Dispatch<Action>;
   state: InitialState;
+  sortedTickets: Ticket[];
 }) {
   return (
     <Routes>
@@ -17,7 +19,13 @@ export default function AppRouter({
       <Route path="*" element={<NotFoundPage />} />
       <Route
         path="/dashboard"
-        element={<Dashboard dispatch={dispatch} state={state} />}
+        element={
+          <Dashboard
+            dispatch={dispatch}
+            state={state}
+            sortedTickets={sortedTickets}
+          />
+        }
       />
     </Routes>
   );

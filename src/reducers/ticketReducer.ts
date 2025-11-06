@@ -3,11 +3,13 @@ export type Action =
   | { type: "UPDATE_TICKET"; payload: Ticket }
   | { type: "DELETE_TICKET"; payload: Ticket }
   | { type: "SET_EDITING_TICKET"; payload: Ticket }
-  | { type: "CLEAR_EDITING_TICKET" };
+  | { type: "CLEAR_EDITING_TICKET" }
+  | { type: "SET_SORTING"; payload: string };
 
 export interface InitialState {
   tickets: Ticket[];
   editingTicket: Ticket | null;
+  sortPreference: string;
 }
 
 export interface Ticket {
@@ -63,6 +65,12 @@ export default function ticketReducer(state: InitialState, action: Action) {
       return {
         ...state,
         editingTicket: null,
+      };
+
+    case "SET_SORTING":
+      return {
+        ...state,
+        sortPreference: action.payload,
       };
     default:
       return state;
