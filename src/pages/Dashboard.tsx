@@ -39,6 +39,7 @@ export default function Dashboard({
     );
   }, []);
   return (
+    //  need to fix the overflow-hidden
     <div
       ref={containerRef}
       className="h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black text-center overflow-hidden"

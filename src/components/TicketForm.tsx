@@ -5,6 +5,7 @@ import {
   forwardRef,
   useEffect,
   useRef,
+  useLayoutEffect,
 } from "react";
 import BlasterButton from "./BlasterButton";
 import gsap from "gsap";
@@ -34,7 +35,7 @@ const TicketForm = forwardRef<HTMLFormElement, TicketFormProps>(
       }
     }, [state.editingTicket]);
 
-    useEffect(() => {
+    useLayoutEffect(() => {
       if (state.editingTicket && EditButton.current) {
         gsap.fromTo(
           EditButton.current,
